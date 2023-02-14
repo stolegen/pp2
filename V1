@@ -1,25 +1,40 @@
-class Person():
-    def __init__(self, name, nationallity):
+class person:
+    def __init__(self,name,nationality):
         self.name = name
-        self.nationallity = nationallity
-    def printInfo(self):
-        print('Name:', self.name)
-        print('Nationallity:', self.nationallity)
-    def setSurname(self, surname):
+        self.nationality = nationality
+
+    def printinfo(self):  
+        print('Name:',self.name)
+        print('Nationality:',self.nationality)
+    def setSurname(self,surname):
         self.surname = surname
     def getSurname(self):
         return self.surname
-    
-class Student(Person):
-    def __init__(self, name, nationallity, id):
-        super().__init__(name, nationallity)
+
+class Student(person):
+    def __init__(self, name, nationality,id):
+        super().__init__(name, nationality)
         self.id = id
-        
-    def printInfo(self):
-        super().printInfo()
-        print('Id:', self.id)
-    
-        
-        
-stud = Student("Shyngys", "Kazakh", "21B031204")
-print(stud.printInfo())
+    def printinfo(self):
+        super().printinfo()
+        print('id :',self.id)
+
+class Teacher(person):
+    def __init__(self, name, nationality,id):
+        super().__init__(name, nationality)
+        self.id = id
+    def printinfo(self):
+        super().printinfo()
+        print('id :',self.id)
+
+
+
+
+stud = Student("Shyngys","British","21B031204")
+(stud.printinfo())
+(stud.setSurname('Tolegen'))
+print(stud.getSurname())
+stud1 = Teacher("Arnur","Kazakh","2211515")
+(stud1.printinfo())
+(stud1.setSurname('Kelgenbaev'))
+(stud1.getSurname())
