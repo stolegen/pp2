@@ -1,0 +1,10 @@
+import datetime
+
+# get current date
+current_date = datetime.datetime.now().date()
+
+# subtract five days
+new_date = current_date - datetime.timedelta(days=5)
+
+# print new date
+print(new_date)
