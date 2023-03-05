@@ -1,0 +1,9 @@
+import re
+
+string = "hello_world foo_bar x_y_z"
+
+pattern = r"[a-z]+_[a-z]+"
+
+matches = re.findall(pattern, string)
+
+print(matches)
