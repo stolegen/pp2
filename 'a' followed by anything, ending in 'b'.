@@ -1,0 +1,10 @@
+import re
+
+string = "acccb abb acdb acb"
+
+pattern = r"a.+b$"
+
+
+matches = re.findall(pattern, string)
+
+print(matches)
