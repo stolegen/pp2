@@ -1,0 +1,9 @@
+import re
+
+string = "HelloWorldHowAreYou"
+
+pattern = r"(?<=.)([A-Z][a-z]+)"
+
+new_string = re.sub(pattern, r" \1", string)
+
+print(new_string)
