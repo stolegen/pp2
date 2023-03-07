@@ -1,0 +1,12 @@
+import re
+
+def camel_to_snake(string):
+    pattern = re.compile(r'(?<!^)(?=[A-Z])')
+    snake_case = pattern.sub('_', string).lower()
+
+    return snake_case
+
+camel_case = "helloWorldHowAreYou"
+snake_case = camel_to_snake(camel_case)
+
+print(snake_case)
