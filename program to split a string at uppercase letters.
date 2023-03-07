@@ -1,0 +1,11 @@
+import re
+
+string = "HelloWorldHowAreYou"
+
+
+pattern = r"[A-Z]"
+split_string = re.split(pattern, string)
+
+split_string = list(filter(None, split_string))
+
+print(split_string)
