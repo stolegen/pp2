@@ -1,0 +1,15 @@
+def snake_to_camel(string):
+ 
+    words = string.split("_")
+
+    capitalized_words = [word.capitalize() for word in words[1:]]
+
+    camel_case = words[0] + "".join(capitalized_words)
+
+    return camel_case
+
+
+snake_case = "hello_world_how_are_you"
+camel_case = snake_to_camel(snake_case)
+
+print(camel_case)
