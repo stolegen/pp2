@@ -1,0 +1,8 @@
+def all_true(tuple):
+    return all(tuple)
+
+# Example usage
+tup1 = (True, True, True)
+tup2 = (True, False, True)
+print(all_true(tup1))  # Output: True
+print(all_true(tup2))  # Output: False
