@@ -1,0 +1,86 @@
+# импортируем пайгейм и дэйттайм для определения текущего времени
+import pygame
+import datetime
+
+# инициализируем пайгейм
+pygame.init()
+
+# размер (ширина и высота)
+size = w,h = (1400, 1050)
+
+# переменная для определения текущей даты
+time = datetime.datetime.now()
+
+# angle = -(int(time.strftime("%S")) * 6) - 6
+# angleM = -(int(time.strftime("%M")) * 6) + (int(time.strftime("%S")) * 6 / 60) - 54
+
+# угол разворота для стрелки секунд. Умножаем на 6 так как полный оборот - 360 градусов. 60 секунд. Значит 1 секунда - 6 градусов
+angle = -(int(time.strftime("%S")) * 6) - 6
+# угол разворота для стрелки минут. Умножаем на 6 так как полный оборот - 360 градусов. 60 минут. Значит 1 минута - 6 градусов. Здесь учитываем и секунды так как 60 секунд - 1 минута
+angleM = -(int(time.strftime("%M")) * 6 + (int(time.strftime("%S")) * 6 / 60)) - 54
+
+# функция для вращения картинок 
+def rotate(image, rect, angle):
+    # встроенная функция для вращения image на угол angle
+    new_image = pygame.transform.rotate(image, angle)
+    # описываем прямоугольник около картинки с прежним центром (центр прежний, так как картинка не должна сдвигаться)
+    rect = new_image.get_rect(center = rect.center)
+    return new_image, rect
+
+# создает окошко 1400 * 1050
+screen = pygame.display.set_mode(size)
+# добавляет название
+pygame.display.set_caption('Mickey clock')
+
+# загружаем картинки
+mickey = pygame.image.load('mickey.png')
+seconds = pygame.image.load('seconds (1).png')
+minutes = pygame.image.load('minutes (1).png')
+
+# surface нужен для того, чтобы картинки могли вращаться. создаем surface размером 1400 * 1050
+imagem = pygame.Surface(size, pygame.SRCALPHA)
+# выводим картинку на экран. (530, 350) - координата где будет расположен верхний левый угол картинки
+imagem.blit(minutes, (530, 350))
+newm = imagem
+# описываем прямоугольник около картинки. Центр прямоугольника - центр экрана
+rectm = imagem.get_rect(center = (w//2, h//2))
+
+# Surface размером 63 * 1050
+image = pygame.Surface((63, h), pygame.SRCALPHA)
+image.blit(seconds, (0, 0))
+new = image
+rect = image.get_rect(center = (w//2, h//2))
+
+clock = pygame.time.Clock()
+done = False
+
+# кадры в секунду
+FPS = 60
+
+# игровой цикл. здесь отслеживаем все события
+while not done:
+    clock.tick(FPS)
+    # пробегаемся по событиям
+    for event in pygame.event.get():
+        # если пользователь закрывает окно
+        if event.type == pygame.QUIT:
+            done = True
+    # выводит картинки на экран
+    screen.blit(mickey, (0, 0))
+    screen.blit(image, rect)
+    screen.blit(imagem, rectm)
+
+    # вызываем функции для вращения
+    image, rect = rotate(new, rect, angle)
+    imagem, rectm = rotate(newm, rectm, angleM)
+
+    # каждый раз значения углов меняются
+    angle -= 0.099
+    angleM -= 0.099/60
+
+    # обновляем экран
+    pygame.display.update()
+
+# закрываем окно
+pygame.quit()
+
